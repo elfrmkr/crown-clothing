@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
+    margin-bottom: 25px; // making below down whatever comes next
   
     .logo-container {
       height: 100%;
@@ -16,10 +16,11 @@
       height: 100%;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: flex-end; // they are on the right side of the page
   
       .option {
-        padding: 10px 15px;
+        padding: 10px 15px; // so that they are not so grouped together
+        cursor: pointer;
       }
     }
   }

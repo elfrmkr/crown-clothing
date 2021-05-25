@@ -8,3 +8,7 @@ a{
     text-decoration: none;
     color: blue;
 }
+/* elements are aligned*/
+* {
+    box-sizing: border-box;
+}
