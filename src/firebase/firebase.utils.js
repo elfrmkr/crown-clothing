@@ -12,7 +12,41 @@ const config = {
     measurementId: "G-TEB625RXLK"
   };
 
-  firebase.initializeApp(config);
+// taking the user object and store it, asynch -> making an API request
+// it should work when a user sign in, getting an actual object not null, making qurey: asking firebase a doc or collection
+
+/* if not false if(!userAuth)
+Firebase can give two objects: 
+1) Query reference -> references the current place of the object
+2) Query Snapshot*/
+export const createUserProfileDocument =
+async(userAuth, additionalData) => {
+  if(!userAuth) return;
+// with this you can see that if the property actually exists from , snapshot represents the data
+    const userRef = firestore.doc(`users/${userAuth.uid}`)
+    const snapShot = await userRef.get();
+// in order to crate the object that isn't stored yet, you need to use reference
+    if(!snapShot.exists)
+    {
+      const {displayName, email} = userAuth;
+      const createAt = new Date();
+// async request to database to store data, .set being the create method
+      try{
+        await userRef.set({
+          displayName,
+          email,
+          createAt,
+          ...additionalData
+        })
+      }catch (error){
+          console.log("error creating user", error.message);
+          }
+    }
+    return userRef;
+  };
+
+
+firebase.initializeApp(config);
 
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();
