@@ -39,7 +39,6 @@ componentDidMount(){
             ...snapShot.data()
           }
         });
-        console.log(this.state);
       });
     }
     // when sign out, set user to null

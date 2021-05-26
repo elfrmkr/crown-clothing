@@ -2,7 +2,7 @@ import React from 'react';
 import './sign-in.styles.scss';
 import FormInput from '../../components/form-input/form-input.component';
 import CustomButton from '../../components/custom-button/custom-button.component'; 
-import {signInWithGoogle} from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle} from '../../firebase/firebase.utils';
 // in order to store what users' typing in, we need to use class
 
 class SignIn extends React.Component{
@@ -13,9 +13,18 @@ class SignIn extends React.Component{
             password:''
         }
     }    
-        handleSubmit = event =>{
+        handleSubmit = async event =>{
             event.preventDefault();
-            this.setState({email:'', password: ''})
+
+            const {email, password} = this.state;
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            this.setState({email:'', password: ''});
+
+        } catch (error) {
+            console.log(error);
+        }    
+           
         }
         // target will be input element itself
         handleChange = event => {
