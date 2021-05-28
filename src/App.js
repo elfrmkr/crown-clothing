@@ -6,7 +6,8 @@ import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import {auth, createUserProfileDocument} from './firebase/firebase.utils';
- 
+import {connect} from 'react-redux';
+ import { setCurrentUser} from './redux/user/user.actions';
 
 //exact will keep away all the matched URL showing up in the same page
 // the moment when switch sees something matched, it doesn't render the rest.
@@ -15,17 +16,13 @@ import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 // we want to store the data that we have stored firebase previosly into our states in order to use it in the app
 class App extends React.Component {
 
-  constructor(){
-    super();
-    this.state = {
-      currentUser : null
-    };
-  }
-
 unsubscribeFromAuth = null;
   // method in firebase
   // match the auth and firebase code together to return desired properties
 componentDidMount(){
+
+const {setCurrentUser} = this.props;
+
   this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
     //this.setState({currentUser: user});
     if(userAuth){
@@ -33,16 +30,14 @@ componentDidMount(){
       const userRef = await createUserProfileDocument(userAuth);
       // getting data related to the user
       userRef.onSnapshot(snapShot => {
-        this.setState({
-          currentUser: {
+        setCurrentUser({
             id:snapShot.id,
-            ...snapShot.data()
-          }
+            ...snapShot.data()          
         });
       });
     }
     // when sign out, set user to null
-    this.setState({currentUser: userAuth});
+    setCurrentUser(userAuth);
   });
 }
 
@@ -52,7 +47,7 @@ componentWillUnmount(){
   render()
 {return (
     <div>  
-      <Header currentUser ={this.state.currentUser}/>
+      <Header/>
       <Switch>
         <Route exact path ='/' component = {HomePage}/>
         <Route path ='/shop' component = {ShopPage}/>
@@ -61,5 +56,12 @@ componentWillUnmount(){
     </div>
   );
 }}
+/*App doesn't need current user anymore; it doesn't do anything with it, just sets it
+First is null becasue we don't need anything from the reducer*/
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+// the action object that is going to pass every reducer
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null,mapDispatchToProps)(App);
