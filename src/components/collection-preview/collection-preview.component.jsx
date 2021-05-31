@@ -10,8 +10,9 @@ const CollectionPreview = ({title, items}) => (
             {
                 //making 4 items in preview
                 items.filter((item,idx) => idx < 4)
-                .map(({id, ...otherItemProps}) => (
-                    <CollectionItem key = {id} {...otherItemProps}/>
+                // passsing the item as a whole, defining with its id
+                .map((item) => (
+                    <CollectionItem key = {item.id} item= {item}/>
                 ))
             }
 
