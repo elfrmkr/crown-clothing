@@ -5,9 +5,12 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import {createStructuredSelector} from 'reselect';
 import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 import {connect} from 'react-redux';
  import { setCurrentUser} from './redux/user/user.actions';
+ import {selectCurrentUser} from './redux/user/user.selector';
+ import checkoutPage from './pages/checkout/checkout.component';
 
 //exact will keep away all the matched URL showing up in the same page
 // the moment when switch sees something matched, it doesn't render the rest.
@@ -51,6 +54,7 @@ componentWillUnmount(){
       <Switch>
         <Route exact path ='/' component = {HomePage}/>
         <Route path ='/shop' component = {ShopPage}/>
+        <Route exact path ='/checkout' component = {checkoutPage}/>
         <Route exact path ='/signin' render = {() => this.props.currentUser ? (<Redirect to = '/'/>): (<SignInAndSignUpPage/>)}/>
       </Switch>
     </div>
@@ -58,8 +62,8 @@ componentWillUnmount(){
 }}
 
 // destructure userReducer
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 /*App doesn't need current user anymore; it doesn't do anything with it, just sets it
