@@ -1,10 +1,11 @@
 .collection-item {
-  width: 22vw;
-  display: flex;
-  flex-direction: column;
-  height: 350px;
-  align-items: center;
-  position: relative;
+    width: 22vw;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    align-items: center;
+    position: relative;
+    
 
   .image {
     width: 100%;
@@ -12,14 +13,23 @@
     background-size: cover;
     background-position: center;
     margin-bottom: 5px;
+    
   }
 
   .custom-button {
-    width: 80%;
+   
+    width: 85%;
     opacity: 0.7;
     position: absolute;
     top: 255px;
     display: none;
+
+    @media screen and (max-width:800px) {
+      display: block;
+      opacity: unset;
+    }
+
+    
   }
 
   &:hover {
@@ -31,6 +41,17 @@
       opacity: 0.85;
       display: flex;
     }
+    @media screen and (max-width:800px) {
+      .image {
+        opacity: unset;
+      }
+  
+      .custom-button {
+        opacity: unset;
+        display: block;
+        padding: 10 10px 0 10px;
+      }
+    }
   }
 
   .collection-footer {
@@ -41,12 +62,16 @@
     font-size: 18px;
 
     .name {
-      width: 90%;
-      margin-bottom: 15px;
+      width: 85%;
+      margin-bottom: 3px;
     }
 
     .price {
-      width: 10%;
+      width: 15%;
     }
   }
+
+   @media screen and (max-width:800px) {
+      width: 45vw;
+    }
 }

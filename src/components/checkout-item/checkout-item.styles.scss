@@ -6,10 +6,20 @@
     padding: 15px 0;
     font-size: 20px;
     align-items: center;
+    @media screen and (max-width:800px) {
+      padding: 3px;
+      display: flex;
+      min-height: 200px;
+      min-width: 270px;
+    }
   
     .image-container {
       width: 23%;
       padding-right: 15px;
+      @media screen and (max-width:800px) {
+        width: 35%;
+
+      }
   
       img {
         width: 100%;
@@ -19,8 +29,10 @@
     .name,
     .quantity,
     .price {
-      width: 23%;
+      width: 23%; 
+      padding: 10px;
     }
+    
   
     .quantity {
       display: flex;
@@ -30,11 +42,14 @@
       }
       .value {
         margin: 0 10px;
+        @media screen and (max-width:800px) {
+          margin: 0 8px;
+        }
       }
     }
   
     .remove-button {
-      padding-left: 12px;
+      padding-left: 17px;
       cursor: pointer;
     }
   }

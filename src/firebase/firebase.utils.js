@@ -23,8 +23,13 @@ export const createUserProfileDocument =
 async(userAuth, additionalData) => {
   if(!userAuth) return;
 // with this you can see that if the property actually exists from , snapshot represents the data
-    const userRef = firestore.doc(`users/${userAuth.uid}`)
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const collectionRef = firestore.collection('users');
+
     const snapShot = await userRef.get();
+    const collectionSnapshot = await collectionRef.get();
+   // console.log({collection: collectionSnapshot.docs.map(doc => doc.data())});
+
 // in order to crate the object that isn't stored yet, you need to use reference
     if(!snapShot.exists)
     {
@@ -45,8 +50,39 @@ async(userAuth, additionalData) => {
     return userRef;
   };
 
+  // each call is individual in firestore, we need to batch (or group) all of the calls together
 
-firebase.initializeApp(config);
+export const addCollectionAndDocuments = async(collectionKey, objectsToAdd) => {
+  const collectionRef = firestore.collection(collectionKey);
+  // in the collection, we will make new document object with unique key
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+  const newDocRef = collectionRef.doc();
+  batch.set(newDocRef, obj);
+  });
+// will fire off the batch request, when commit succeeds, it will come back with a null value, it will need to return from the call, make it async fnc
+  return await batch.commit();
+};
+
+  export const converCollectionsSnapshotToMap = (collections) =>{
+    const transformedCollections = collections.docs.map(doc => {
+      const {title, items} = doc.data();
+      return {
+        routeName: encodeURI(title.toLowerCase()),
+        id: doc.id,
+        title,
+        items
+      }
+    });
+  // initial object goes through first collection. Empty object with the property of hats e.g equals to the hats collection and it returns that object and goes to the second object i.e. jackets
+  return transformedCollections.reduce((accumulator, collection) =>{
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator
+  }, {})
+  };
+
+
+  firebase.initializeApp(config);
 
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();

@@ -1,4 +1,4 @@
-import './App.css';
+import {GlobalStyle} from './global.styles';
 import React from 'react';
 import HomePage from './pages/homepage/homepage.component';
 import {Switch, Route, Redirect} from 'react-router-dom';
@@ -11,7 +11,6 @@ import {connect} from 'react-redux';
  import { setCurrentUser} from './redux/user/user.actions';
  import {selectCurrentUser} from './redux/user/user.selector';
  import checkoutPage from './pages/checkout/checkout.component';
-
 //exact will keep away all the matched URL showing up in the same page
 // the moment when switch sees something matched, it doesn't render the rest.
 // header is always present and rendered in this location
@@ -24,7 +23,7 @@ unsubscribeFromAuth = null;
   // match the auth and firebase code together to return desired properties
 componentDidMount(){
 
-const {setCurrentUser} = this.props;
+  const {setCurrentUser} = this.props;
 
   this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
     //this.setState({currentUser: user});
@@ -41,6 +40,7 @@ const {setCurrentUser} = this.props;
     }
     // when sign out, set user to null
     setCurrentUser(userAuth);
+    
   });
 }
 
@@ -50,6 +50,7 @@ componentWillUnmount(){
   render()
 {return (
     <div>  
+      <GlobalStyle/>
       <Header/>
       <Switch>
         <Route exact path ='/' component = {HomePage}/>
@@ -63,7 +64,7 @@ componentWillUnmount(){
 
 // destructure userReducer
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 
 /*App doesn't need current user anymore; it doesn't do anything with it, just sets it
