@@ -5,7 +5,6 @@ const INITIAL_STATE = {
       imageUrl:
         "https://i.ibb.co/dfCvKd1/jeremy-mcknight-Mjgg-Sc-Wrwug-unsplash.jpg",
       id: 1,
-      size: "medium",
       linkUrl: "shop/hats",
     },
     {

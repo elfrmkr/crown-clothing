@@ -40,6 +40,9 @@ export const Title = styled(Link)`
   @media screen and (max-width: 500px) {
     font-size: 28px;
   }
+  @media screen and (max-width: 400px) {
+    font-size: 24px;
+  }
 `;
 export const OptionsContainer = styled.div`
   width: 50%;
@@ -58,24 +61,34 @@ export const OptionsContainer = styled.div`
   @media screen and (max-width: 500px) {
     width: 50%;
   }
+  @media screen and (max-width: 400px) {
+    width: 40%;
+  }
 `;
 
 // share styles duplicated
 export const OptionLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
 
   @media screen and (max-width: 800px) {
     font-size: 18px;
   }
 
-  @media screen and (max-width: 500px) {
-    font-size: 16px;
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 450px) {
     font-size: 12px;
-    width: 32%;
+    width: 40%;
+  }
+
+  @media screen and (max-width: 420px) {
+    font-size: 10px;
+    width: 48%;
   }
 `;
 export const Logostyle = styled(Link)`
