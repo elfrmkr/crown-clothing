@@ -4,7 +4,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import { connect } from "react-redux";
 import { addItem } from "../../redux/cart/cart.actions";
 import { ToastMessage } from "../../toasts/toast";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Zoom } from "react-toastify";
 
 const CollectionItem = ({ item, addItem }) => {
   const notify = React.useCallback((type, message) => {
@@ -18,29 +18,35 @@ const CollectionItem = ({ item, addItem }) => {
   // we are doing this because we want these values to use still
   const { name, price, imageUrl } = item;
   return (
-    <div className="collection-item">
-      <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
-      <div className="collection-footer">
-        <span className="name">{name}</span>
-        <span className="price">${price}</span>
+    <div>
+      <div className="collection-item">
+        <div
+          className="image"
+          style={{ backgroundImage: `url(${imageUrl})` }}
+        />
+        <div className="collection-footer">
+          <span className="name">{name}</span>
+          <span className="price">${price}</span>
+        </div>
+        <CustomButton
+          className="custom-button"
+          onClick={() => {
+            addItem(item);
+            notify("success", "Your item has been added!");
+          }}
+          inverted
+        >
+          {" "}
+          ADD TO CHART
+        </CustomButton>
       </div>
-      <CustomButton
-        className="custom-button"
-        onClick={() => {
-          addItem(item);
-          notify("success", "Success!");
-        }}
-        inverted
-      >
-        {" "}
-        ADD TO CHART
-      </CustomButton>
       <ToastContainer
         position="bottom-left"
-        autoClose={4000}
+        autoClose={5000}
+        transition={Zoom}
         hideProgressBar={true}
-        newestOnTop={false}
-        draggable={false}
+        newestOnTop
+        draggable={true}
         pauseOnVisibilityChange
         closeOnClick
         pauseOnHover

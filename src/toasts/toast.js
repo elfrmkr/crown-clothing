@@ -2,47 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import {
-  FaInfo,
-  FaCheck,
-  FaExclamationTriangle,
-  FaBug,
-  FaExclamationCircle,
-} from "react-icons/fa";
-
-export const displayIcon = (type) => {
-  switch (type) {
-    case "success":
-      return <FaCheck />;
-    case "info":
-      return <FaInfo />;
-    case "error":
-      return <FaExclamationCircle />;
-    case "warning":
-      return <FaExclamationTriangle />;
-    default:
-      return <FaBug />;
-  }
-};
 
 export const ToastMessage = ({ type, message }) => {
   toast[type](
     <div style={{ display: "flex", color: "black" }}>
-      <div
-        style={{
-          fontSize: 15,
-          paddingTop: 8,
-          flexShrink: 0,
-          textAlign: "center",
-          width: "30px",
-        }}
-      >
-        {displayIcon(type)}
-      </div>
       <div style={{ flexGrow: 1, fontSize: 15, padding: "8px 12px" }}>
         {message}
       </div>
-    </div>
+    </div>,
+    {
+      theme: "colored",
+    }
   );
 
   ToastMessage.propTypes = {

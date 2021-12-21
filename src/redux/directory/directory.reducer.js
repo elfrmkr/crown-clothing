@@ -22,7 +22,7 @@ const INITIAL_STATE = {
       linkUrl: "shop/sneakers",
     },
     {
-      title: "womens",
+      title: "women's",
       imageUrl:
         "https://i.ibb.co/C72GZND/helen-ast-n-Smk-Z4-Af-L2-M-unsplash.jpg",
       size: "large",
@@ -30,7 +30,7 @@ const INITIAL_STATE = {
       linkUrl: "shop/womens",
     },
     {
-      title: "mens",
+      title: "men's",
       imageUrl:
         "https://i.ibb.co/1zbtZcn/allef-vinicius-Px-Zy-PAo91os-unsplash.jpg",
       size: "large",

@@ -4,6 +4,7 @@ import FormInput from "../../components/form-input/form-input.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 // in order to store what users' typing in, we need to use class
+import { toast, ToastContainer, Zoom } from "react-toastify";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -28,6 +29,15 @@ class SignIn extends React.Component {
   handleChange = (event) => {
     const { value, name } = event.target;
     this.setState({ [name]: value });
+  };
+  handleRender = () => {
+    setTimeout(() => {
+      this.setState({ render: !this.state.render });
+    }, 7000);
+
+    toast.info("Logging in!", {
+      theme: "colored",
+    });
   };
 
   render() {
@@ -61,7 +71,10 @@ class SignIn extends React.Component {
             <CustomButton type="submit"> Sign In</CustomButton>
             <CustomButton
               type="button"
-              onClick={signInWithGoogle}
+              onClick={() => {
+                signInWithGoogle();
+                this.handleRender();
+              }}
               isGoogleSignIn
             >
               {" "}
@@ -69,6 +82,17 @@ class SignIn extends React.Component {
             </CustomButton>
           </div>
         </form>
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          transition={Zoom}
+          hideProgressBar={true}
+          newestOnTop
+          draggable={true}
+          pauseOnVisibilityChange
+          closeOnClick
+          pauseOnHover
+        />
       </div>
     );
   }
