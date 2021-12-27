@@ -7,6 +7,11 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+  -webkit-box-shadow: 0 4px 6px -6px #333333;
+  -moz-box-shadow: 0 4px 6px -6px #333333;
+  box-shadow: 0 7px 5px -6px #333333;
+  padding-left: 10px;
+  padding-right: 10px;
 
   @media screen and (max-width: 800px) {
     height: 60px;
@@ -14,11 +19,20 @@ export const HeaderContainer = styled.div`
     margin-bottom: 20px;
   }
 `;
+export const Footer = styled.div`
+  clear: both;
+  position: relative;
+  height: 100px;
+  margin-bottom: 10px;
+  background-color: #4285f4;
+`;
 
 export const LogoContainer = styled(Link)`
   height: 100%;
   width: 70px;
-  padding: 20px;
+  display: inline-block;
+  align-items: center;
+  margin-bottom: 20px;
 
   @media screen and (max-width: 800px) {
     width: 50px;
@@ -28,11 +42,14 @@ export const LogoContainer = styled(Link)`
 export const Title = styled(Link)`
   font-family: "Cookie", cursive;
   font-weight: 300px;
-  margin-top: 10px;
   white-space: nowrap;
+  display: relative;
   justify-content: flex-start;
   font-size: 40px;
+  margin-top: 15px;
+  align-items: center;
 
+  display: inline-block;
   @media screen and (max-width: 800px) {
     font-size: 30px;
   }
@@ -70,8 +87,14 @@ export const OptionsContainer = styled.div`
 export const OptionLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
+  justify-content: center;
+  display: flex;
   font-family: "Open Sans", sans-serif;
   font-family: "Raleway", sans-serif;
+  &:hover {
+    border-radius: 20px;
+    background: #99a4aaaa;
+  }
 
   @media screen and (max-width: 800px) {
     font-size: 18px;
@@ -92,17 +115,8 @@ export const OptionLink = styled(Link)`
   }
 `;
 export const Logostyle = styled(Link)`
-  width: 50px;
-  height: 50px;
-  margin-top: 40px;
-  margin-left: 60px;
-  display: flex-shrink;
-
-  @media screen and (max-width: 800px) {
-    margin-left: 45px;
-  }
-
-  @media screen and (max-width: 500px) {
-    margin-left: 40px;
-  }
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
 `;

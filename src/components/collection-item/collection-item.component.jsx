@@ -11,10 +11,6 @@ const CollectionItem = ({ item, addItem }) => {
     ToastMessage({ type, message });
   }, []);
 
-  const dismiss = React.useCallback(() => {
-    ToastMessage.dismiss();
-  }, []);
-
   // we are doing this because we want these values to use still
   const { name, price, imageUrl } = item;
   return (

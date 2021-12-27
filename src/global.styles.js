@@ -1,8 +1,10 @@
-import {createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 
 body{
+    background-color: rgb(244, 244, 244);
+
     font-family: 'Open Sans Condensed';
     padding: 20px 40px;
 
